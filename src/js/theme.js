@@ -11,12 +11,19 @@ if (getLocalStor('theme') && getLocalStor('theme') === 'dark-theme') {
 
 function swithThemeFn() {
     if (swithThemeRef.checked) {
-        document.body.classList.add('dark-theme');
-        document.body.classList.remove('light-theme');
+        addClassFn('body', 'dark-theme')
+        remClassFn('body', 'light-theme')
         setLocalStor('theme', 'dark-theme')
     } else {
-        document.body.classList.add('light-theme');
-        document.body.classList.remove('dark-theme');
+        addClassFn('body', 'light-theme')
+        remClassFn('body', 'dark-theme')
         setLocalStor('theme', 'light-theme')
     }
+}
+
+function addClassFn(whom, what) {
+    document.querySelector(whom).classList.add(what)
+}
+function remClassFn(whom, what) {
+    document.querySelector(whom).classList.remove(what)
 }
