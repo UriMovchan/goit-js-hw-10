@@ -1,29 +1,30 @@
-function getLocalStor(item) {return localStorage.getItem(item)};
-function setLocalStor(key, val) {localStorage.setItem(key, val)};
+const body = document.body;
+const getLocalStor = (key) => localStorage.getItem(key);
+const setLocalStor = (key, val) => localStorage.setItem(key, val);
+const removeLocalStor = (key) => localStorage.removeItem(key);
 
 const swithThemeRef = document.getElementById('theme-switch-toggle');
-swithThemeRef.addEventListener('change', swithThemeFn);
+swithThemeRef.addEventListener('change', checkTheme);
 
 if (getLocalStor('theme') && getLocalStor('theme') === 'dark-theme') {
     swithThemeRef.checked = true;
-    swithThemeFn();
+    setDarkTheme();
 } 
 
-function swithThemeFn() {
+function checkTheme() {
     if (swithThemeRef.checked) {
-        addClassFn('body', 'dark-theme')
-        remClassFn('body', 'light-theme')
-        setLocalStor('theme', 'dark-theme')
+        setDarkTheme();
     } else {
-        addClassFn('body', 'light-theme')
-        remClassFn('body', 'dark-theme')
-        setLocalStor('theme', 'light-theme')
+        unsetDarkTheme();
     }
 }
 
-function addClassFn(whom, what) {
-    document.querySelector(whom).classList.add(what)
+function setDarkTheme() {
+    body.classList.add('dark-theme');
+    setLocalStor('theme', 'dark-theme');
 }
-function remClassFn(whom, what) {
-    document.querySelector(whom).classList.remove(what)
+
+function unsetDarkTheme() {
+    body.classList.remove('dark-theme');
+    removeLocalStor('theme');
 }
